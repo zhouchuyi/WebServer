@@ -6,9 +6,8 @@
 #include<sys/types.h>
 #include"CurrentThread.h"
 #include"noncopyable.h"
-#include"Condition.h"
 class MutexLockGuard;
-
+class Condition;
 class MutexLock:noncopyable
 {
 private:
