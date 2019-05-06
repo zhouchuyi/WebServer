@@ -1,9 +1,12 @@
-objects=Thread_test.o CountDownLatch.o Thread.o
+.PHONY: clean
+objects=thread_test.o CountDownLatch.o Thread.o
 test : $(objects)
-	clang++ -std=c++11 -o test $(objects)
+	g++ -std=c++11 -o test $(objects) -lpthread
 CountDownLatch.o:../mutex.h ../Condition.h
-	clang++ -std=c++11 -c ../CountDownLatch.cpp
+	g++ -std=c++11 -c ../CountDownLatch.cpp -lpthread
 Thread.o:../CountDownLatch.h
-	clang++ -std=c++11 -c ../Thread.cpp
-Thread_test.o:../mutex.h ../Thread.h
-	clang++ -std=c++11 -c Thread_test.cpp
+	g++ -std=c++11 -c ../Thread.cpp -lpthread
+thread_test.o:../mutex.h ../Thread.h
+	g++ -std=c++11 -c thread_test.cpp -lpthread
+clean:
+	rm test $(objects)
