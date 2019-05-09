@@ -49,6 +49,27 @@ private:
     friend class Condition;
     pid_t holder_;
     pthread_mutex_t mutex_;
+
+
+    class UnassignGuard:noncopyable
+    {
+    private:
+        MutexLock &owner_;
+    public:
+        explicit UnassignGuard(MutexLock &owner)
+        : owner_(owner)
+        {
+            owner_.unassignHolder();
+        }
+        ~UnassignGuard()
+        {
+            owner_.assignHolder();
+        }
+    };
+    
+    
+
+
 };
 
 class MutexLockGuard:noncopyable

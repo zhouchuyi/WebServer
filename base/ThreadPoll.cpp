@@ -39,13 +39,13 @@ void ThreadPoll::stop()
 void ThreadPoll::start(int numThread)
 {
     assert(threads_.empty());
+    running_=true;
     threads_.reserve(numThread);
     char id[32];
-    for(size_t i = 0; i < numThread; i++)
+    for(int i = 0; i < numThread; i++)
     {
         snprintf(id,sizeof id,"%5d",i);
-        threads_.emplace_back(
-            std::bind(&ThreadPoll::runInthread,this),name_+id);
+        threads_.emplace_back(new Thread(std::bind(&ThreadPoll::runInthread,this),name_+id));
         threads_[i]->start();
     }
     if(numThread==0 && threadInitCallback_)
@@ -68,6 +68,8 @@ void ThreadPoll::runInthread()
         {
             task();
         }
+        
+        
     }
     
 }
@@ -107,13 +109,18 @@ void ThreadPoll::run(Task tsk)
     {
         tsk();
     }
-    MutexLockGuard lock(mutex_);
-    while(isFull())
+    else
     {
-        notFull_.wait();
+        MutexLockGuard lock(mutex_);
+        while(isFull())
+        {
+            notFull_.wait();
+        }
+        
+        assert(!isFull());
+        queue_.push_back(std::move(tsk));
+        notEmpty_.notify();
+
     }
     
-    assert(!isFull());
-    queue_.push_back(std::move(tsk));
-    notEmpty_.notify();
 }
