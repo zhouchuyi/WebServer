@@ -1,6 +1,6 @@
 .PHONY: clean
 objects=LogFile_test.o LogFile.o Thread.o FileUtil.o CountDownLatch.o LogStream.o \
-		AsyncLogging.o
+		AsyncLogging.o Logging.o
 test:$(objects)
 	g++ -std=c++11 -o test $(objects) -lpthread -g
 LogFile.o:../FileUtil.h ../mutex.h ../noncopyable.h
@@ -17,6 +17,7 @@ LogStream.o:
 	g++ -std=c++11 -c ../LogStream.cpp -lpthread -g
 AsyncLogging.o:
 	g++ -std=c++11 -c ../AsyncLogging.cpp -lpthread -g
-
+Logging.o:
+	g++ -std=c++11 -c ../Logging.cpp -lpthread -g
 clean:
 	rm *.o test
