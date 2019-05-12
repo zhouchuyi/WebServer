@@ -1,6 +1,8 @@
 #include"Timer.h"
-
+#include<assert.h>
 const int kMicroSecondsPerSencond=1000*1000;
+std::atomic<int> Timer::Atomic_num=0;
+
 
 Timer::Timestamp Timer::addTime(Timestamp timestamp,double seconds)
 {
@@ -12,4 +14,13 @@ void Timer::restart(Timestamp now)
 {
     assert(repeat_);
     expiration_=addTime(now,interval_);
+}
+
+Timer::Timestamp now()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    Timer::Timestamp seconds=tv.tv_sec;
+    return static_cast<Timer::Timestamp>(seconds*kMicroSecondsPerSencond+tv.tv_usec);
+    
 }

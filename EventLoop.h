@@ -6,15 +6,16 @@
 #include"base/Thread.h"
 #include"Timer.h"
 #include<functional>
+#include<vector>
 class Channel;
 class TimeQueue;
-class poll;
+class Poller;
 
 class EventLoop
 {    
 
 public:
-    typedef int64_t Timestamp;
+    typedef Timer::Timestamp Timestamp;
     typedef std::function<void()> Functor;
     typedef Functor TimerCallback;
     EventLoop();
@@ -38,17 +39,22 @@ push cb to queue and wake up io thread */
 
     TimerId runEvery(double interval,TimerCallback cb);
 
+    void cancel(TimerId timerId);
     void wakeup();
+
     void updateChannel(Channel *channel);
     void removeChannel(Channel *channel);
-    void hasChannel(Channel *channel);
+    bool hasChannel(Channel *channel);
     
+
     void assertInLoopThread();
 
     bool isInLoopThread()const
     {
         return threadId_==CurrentThread::tid();
     }
+
+    static EventLoop* getEventLoopOfCurrentThread();
 
 private:
 
@@ -57,10 +63,23 @@ private:
     void doPendingFunctors();
 
     typedef std::vector<Channel*> ChannelList;
+    
     const pid_t threadId_; 
-    std::atomic<bool> looping_;
-    std::atomic<bool> quit_;
+    std::atomic<bool> looping_;//atomic
+    std::atomic<bool> quit_;//atomic
+    std::atomic<bool> eventHandling_;//atomic
+    std::atomic<bool> callingPendingFunctors_;
+    int64_t iteration;
+    Timestamp pollReturnTime;
+    std::unique_ptr<Poller> poller_;
+    std::unique_ptr<TimeQueue> timequeue_;
+    int WakeupFd_;
+    std::unique_ptr<Channel> wakeupChannel;
 
+    ChannelList activechannel_;
+    Channel * currentactivechannel_;
+
+    std::vector<Functor> pedingFunctors_;
 };
 
 

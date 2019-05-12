@@ -3,8 +3,8 @@
 #include<time.h>
 #include<functional>
 #include<atomic>
-
-extern const int kMicroSecondsPerSencond;
+#include<sys/time.h>
+static const int kMicroSecondsPerSencond;
 
 class Timer
 {
@@ -36,7 +36,7 @@ public:
     {
         return seq_;
     }
-    Timestamp expiretion() const
+    Timestamp expiration() const
     {
         return expiration_;
     }
@@ -58,7 +58,7 @@ class TimerId
 {
 
 public:
-    TimerId(Timer *timer,int64_t seq)
+    TimerId(Timer *timer,int seq)
      :timer_(timer),
      seq_(seq)
      {}
@@ -68,12 +68,12 @@ public:
      {} 
     ~TimerId()=default;
 private:
-    friend class TimerQueue;
+    friend class TimeQueue;
     Timer *timer_;
-    int64_t seq_;
+    int seq_;
 };
 
-
+Timer::Timestamp now();
 
 
 
