@@ -63,7 +63,8 @@ TimeQueue::TimeQueue(EventLoop *loop)
     activeTimers_(),
     cancelingTimers_()
     {
-
+        timerfdChannel_.setReadCallback(std::bind(&TimeQueue::handleRead,this));
+        timerfdChannel_.enableReading();
     }
 
 TimeQueue::~TimeQueue()
@@ -79,6 +80,7 @@ TimeQueue::~TimeQueue()
 }
 TimerId TimeQueue::addTimer(TimerCallback cb,Timestamp when,double interval)
 {
+    assert(cb);
     Timer *timer=new Timer(std::move(cb),when,interval);
     loop_->runInLoop(std::bind(&TimeQueue::addTimerInLoop,this,timer));
     return TimerId(timer,timer->sequence());
@@ -137,7 +139,7 @@ bool TimeQueue::insert(Timer * timer)
         assert(result.second);(void)result;
     }
     {
-        auto result=activeTimers_.insert(ActiveTimer(timer,when));
+        auto result=activeTimers_.insert(ActiveTimer(timer,timer->sequence()));
         assert(result.second);(void)result;
     }
     assert(activeTimers_.size()==timers_.size());
@@ -184,7 +186,7 @@ std::vector<std::pair<Timer::Timestamp,Timer*>> TimeQueue::getExpired(Timestamp 
 
 void TimeQueue::reset(const std::vector<Entry> & expired,Timestamp now)
 {
-    Timestamp nextexpire;
+    Timestamp nextexpire=0;
 
     for (auto &i : expired)
     {

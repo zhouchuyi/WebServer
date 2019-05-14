@@ -4,8 +4,9 @@
 #include<functional>
 #include<atomic>
 #include<sys/time.h>
-static const int kMicroSecondsPerSencond;
-
+#include<assert.h>
+extern const int kMicroSecondsPerSencond;
+extern std::atomic<int> Atomic_num;
 class Timer
 {
 public:
@@ -21,10 +22,11 @@ public:
     {
 
     }
-    ~Timer();
+    ~Timer()=default;
     
     void run() const
     {
+        assert(cb_);
         cb_();
     }
 
@@ -43,14 +45,13 @@ public:
 
     void restart(Timestamp now);
 
-    static inline Timestamp addTime(Timestamp timestamp,double seconds);
+    static Timestamp addTime(Timestamp timestamp,double seconds);
 private:
     const Timercallback cb_;
     Timestamp expiration_;
     const bool repeat_;
     const double interval_;
     const int seq_;
-    static std::atomic<int> Atomic_num;
     
 };
 

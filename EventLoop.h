@@ -47,7 +47,11 @@ push cb to queue and wake up io thread */
     bool hasChannel(Channel *channel);
     
 
-    void assertInLoopThread();
+    void assertInLoopThread()
+    {
+        if(!isInLoopThread())
+            abortNotInLoopThread();
+    }
 
     bool isInLoopThread()const
     {
@@ -55,6 +59,11 @@ push cb to queue and wake up io thread */
     }
 
     static EventLoop* getEventLoopOfCurrentThread();
+
+    bool enentHandling() const
+    {
+        return eventHandling_;
+    }
 
 private:
 
@@ -69,17 +78,17 @@ private:
     std::atomic<bool> quit_;//atomic
     std::atomic<bool> eventHandling_;//atomic
     std::atomic<bool> callingPendingFunctors_;
-    int64_t iteration;
+    int64_t iteration_;
     Timestamp pollReturnTime;
     std::unique_ptr<Poller> poller_;
     std::unique_ptr<TimeQueue> timequeue_;
     int WakeupFd_;
     std::unique_ptr<Channel> wakeupChannel;
 
-    ChannelList activechannel_;
+    ChannelList activechannels_;
     Channel * currentactivechannel_;
-
-    std::vector<Functor> pedingFunctors_;
+    mutable MutexLock mutex_;
+    std::vector<Functor> pendingFunctors_;
 };
 
 

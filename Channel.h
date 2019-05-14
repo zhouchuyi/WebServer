@@ -32,7 +32,7 @@ public:
     int events()const{return events_;}
     void set_revents(int revt){revents_=revt;}
     bool isNoneEvent()const{return events_==kNoneEvent;}
-    void EnableReading()
+    void enableReading()
     {
         events_|=kReadEvent;
         update();
@@ -42,7 +42,7 @@ public:
         events_&=~kReadEvent;
         update();
     }
-    void EnableWritinging()
+    void enableWritinging()
     {
         events_|=kWriteEvent;
         update();

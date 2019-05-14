@@ -26,11 +26,11 @@ public:
 
     static Poller* newDefaultPoller(EventLoop *loop);
 protected:
-    typedef std::map<int,Channel*> ChannelMap;
+    typedef std::map<int,Channel*> ChannelMap;//the map between fd and channel
     ChannelMap channels_;
 
 private:
-    EventLoop* ownerLoop_;
+    EventLoop* ownerLoop_;//owner loop
 };
 
 

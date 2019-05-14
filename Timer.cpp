@@ -1,7 +1,7 @@
 #include"Timer.h"
 #include<assert.h>
 const int kMicroSecondsPerSencond=1000*1000;
-std::atomic<int> Timer::Atomic_num=0;
+std::atomic<int> Atomic_num(0);
 
 
 Timer::Timestamp Timer::addTime(Timestamp timestamp,double seconds)
