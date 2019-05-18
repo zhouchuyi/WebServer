@@ -7,11 +7,12 @@
 #include"../base/Logging.h"
 EventLoop *g_loop;
 Channel*  g_channel;
-const char *str="time out/n";
+const char *str="time out\n";
 void timeout()
 {
     // Log<<"time out\n";
     write(fileno(stdout),str,strlen(str));
+    
 }
 int main(int argc, char const *argv[])
 {
