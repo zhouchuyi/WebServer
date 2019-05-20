@@ -8,6 +8,9 @@
 #include<sys/socket.h>
 #include<errno.h>
 #include<arpa/inet.h>
+#include<fcntl.h>
+#include<unistd.h>
+#include<string.h>
 
 class InetAddress;
 
@@ -23,17 +26,19 @@ public:
     {
         return sockfd_;
     }
-    bool getTcpInfo();
+    // bool getTcpInfo();
 
     void bindAddress(const InetAddress &localaddr);
 
+    void listen();
+    
     int accept(InetAddress* peeraddr);
 
     void shutdownWrite();
 
     void setTcpNodelay(bool on);
 
-    void serReuseAddr(bool one);
+    void serReuseAddr(bool on);
 
     void setKeepAlive(bool on);
 private:
@@ -49,7 +54,7 @@ namespace sockets
     {
         return htobe64(host64);
     }
-    inline uint32_t hostToNetwork64(uint32_t host32)
+    inline uint32_t hostToNetwork32(uint32_t host32)
     {
         return htobe32(host32);
     }
@@ -66,7 +71,7 @@ namespace sockets
         return be64toh(net64t);
     }
 
-    inline uint32_t networkToHost64(uint32_t net32t)
+    inline uint32_t networkToHost32(uint32_t net32t)
     {
         return be32toh(net32t);
     }
@@ -75,10 +80,24 @@ namespace sockets
         return be16toh(net16t);
     }
 
+    inline ssize_t read(int fd,void *buf,size_t n)
+    {
+        return ::read(fd,buf,n);
+    }
+
+    inline ssize_t write(int fd,const void *buf,size_t n)
+    {
+        return ::write(fd,buf,n);
+    }
+    
     const struct sockaddr* sockaddr_cast(const struct sockaddr_in* addr);
 
     struct sockaddr* sockaddr_cast(struct sockaddr_in* addr);
 
+    const struct sockaddr_in* sockaddr_in_cast(const struct sockaddr* addr);
+
+    struct sockaddr_in* sockaddr_in_cast(struct sockaddr* addr);
+    
     int createNonblocking(sa_family_t familt);
 
     void Bind(int sockfd,const struct sockaddr* addr);
@@ -93,9 +112,13 @@ namespace sockets
 
     void shutdownWrite(int sockfd);
 
-    struct sockaddr_in* getLocalAddr(int sockfd);
+    struct sockaddr_in getLocalAddr(int sockfd);
 
-    struct sockaddr_in* getPeerAddr(int sockfd);
+    struct sockaddr_in getPeerAddr(int sockfd);
+
+    void toIp(char *buf,size_t size,const struct sockaddr* addr);
+
+    void toIpPort(char *buf,size_t size,const struct sockaddr* addr);
 } // namespace sockets
 
 
