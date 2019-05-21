@@ -22,7 +22,7 @@ public:
     { }
     ~Socket();
 
-    int fd() const
+    const int fd() const
     {
         return sockfd_;
     }
@@ -38,7 +38,7 @@ public:
 
     void setTcpNodelay(bool on);
 
-    void serReuseAddr(bool on);
+    void setReuseAddr(bool on);
 
     void setKeepAlive(bool on);
 private:

@@ -14,8 +14,7 @@ namespace
     //create eventfd
     int createEventfd()
     {
-        int fd=::eventfd(0,EFD_NONBLOCK|EFD_CLOEXEC);
-        printf("wakeup fd %d\n",fd);    
+        int fd=::eventfd(0,EFD_NONBLOCK|EFD_CLOEXEC); 
         if(fd<0)
         {
             Log<<"error in creating eventfd\n";

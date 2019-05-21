@@ -7,13 +7,12 @@
 
 class EventLoop;
 
-class Channel
+class Channel:noncopyable
 {
 public:
     typedef int64_t Timestamp; 
     typedef std::function<void()> EventCallback;
     // typedef std::function<void(Timestamp)> ReadEventCallback;//used to wake up loop
-    
     Channel(EventLoop *loop,int fd);
     ~Channel();
 
@@ -27,7 +26,6 @@ public:
     {closeCallback_=std::move(cb);}
     void setErrorCallback(EventCallback cb)
     {errorCallback_=std::move(cb);};
-
     int fd()const{return fd_;}
     int events()const{return events_;}
     void set_revents(int revt){revents_=revt;}

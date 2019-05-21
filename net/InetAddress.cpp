@@ -1,14 +1,14 @@
 #include"InetAddress.h"
 
-
-InetAddress::InetAddress(uint16_t port,bool loopbackOnly)
+//for server to set port
+InetAddress::InetAddress(uint16_t port)
 {
     memset(&addr_,0,sizeof addr_);
     addr_.sin_family=AF_INET;
     addr_.sin_addr.s_addr=sockets::hostToNetwork32(INADDR_ANY);
     addr_.sin_port=sockets::hostToNetwork16(port);
 }
-
+//for client to set port and ip
 InetAddress::InetAddress(const std::string ip,uint16_t port,bool loopbackOnly)
 {
     memset(&addr_,0,sizeof addr_);

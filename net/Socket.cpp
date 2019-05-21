@@ -29,6 +29,7 @@ struct sockaddr_in* sockets::sockaddr_in_cast(struct sockaddr* addr)
 int  sockets::createNonblocking(sa_family_t familt)
 {
     int sockfd=::socket(familt,SOCK_CLOEXEC|SOCK_NONBLOCK|SOCK_STREAM,IPPROTO_TCP);
+    // int sockfd=::socket(familt,SOCK_CLOEXEC|SOCK_STREAM,IPPROTO_TCP);
     if(sockfd<0)
     {
         perror("sockfd create error ");
@@ -82,6 +83,7 @@ int sockets::Accept(int sockfd,struct sockaddr* addr)
         case ENOMEM:
         case ENOTSOCK:
         case EOPNOTSUPP:
+            perror("accept error ");
             break;
         default:
             break;
@@ -188,19 +190,19 @@ void Socket::shutdownWrite()
 void Socket::setTcpNodelay(bool on)
 {
     int optval=on ? 1 : 0;
-    ::setsockopt(sockfd_,IPPROTO_TCP,TCP_NODELAY,&optval,sizeof optval);
+    ::setsockopt(sockfd_,IPPROTO_TCP,TCP_NODELAY,&optval,static_cast<socklen_t>(sizeof optval));
 }
 
-void Socket::serReuseAddr(bool on)
+void Socket::setReuseAddr(bool on)
 {
     int optval=on ? 1 : 0;
-    ::setsockopt(sockfd_,SOL_SOCKET,SO_REUSEADDR,&optval,sizeof optval);
+    ::setsockopt(sockfd_,SOL_SOCKET,SO_REUSEADDR,&optval,static_cast<socklen_t>(sizeof optval));
 }
 
 void Socket::setKeepAlive(bool on)
 {
     int optval=on ? 1 : 0;
-    ::setsockopt(sockfd_,SOL_SOCKET,SO_KEEPALIVE,&optval,sizeof optval);
+    ::setsockopt(sockfd_,SOL_SOCKET,SO_KEEPALIVE,&optval,static_cast<socklen_t>(sizeof optval));
 
 }
 

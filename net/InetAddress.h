@@ -9,7 +9,7 @@ class InetAddress
 {
 public:
     // for server only set port
-    explicit InetAddress(uint16_t port,bool loopbackOnly=false);
+    explicit InetAddress(uint16_t port);
     //for client,need to set ip and port
     explicit InetAddress(const struct sockaddr_in& addr)
      :addr_(addr)
