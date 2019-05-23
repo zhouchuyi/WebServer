@@ -11,7 +11,7 @@ Acceptor::Acceptor(EventLoop *loop,const InetAddress &listenAddr)
     {
      assert(idleFd_>=0);
      assert(listenSocket_.fd()>=0);
-    //  listenSocket_.setReuseAddr(true);
+     listenSocket_.setReuseAddr(true);
     assert(acceptChannel_.fd()==listenSocket_.fd());
      listenSocket_.bindAddress(listenAddr);
      acceptChannel_.setReadCallback(std::bind(&Acceptor::handleRead,this));
@@ -35,9 +35,10 @@ void Acceptor::handleRead()
     if(connfd>=0)
     {
         //fix me
-        printf("new connection\n");
+        
         if(newConnectionCallback_)
         {
+            printf("new connection\n");
             newConnectionCallback_(connfd,peeraddress);
         }
     }

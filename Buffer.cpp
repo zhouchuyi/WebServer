@@ -29,5 +29,5 @@ ssize_t Buffer::readFd(int fd,int *savedErrno)
         hasWritten(writable);
         append(extrabuf,n-writable);
     }
-    
+    return n;
 }

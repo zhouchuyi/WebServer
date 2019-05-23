@@ -1,5 +1,5 @@
 .PHONY: clean
-objects1=client.o InetAddress.o Socket.o
+objects1=client.o InetAddress.o Socket.o Buffer.o
 # objects2=server.o InetAddress.o Socket.o Acceptor.o \
 # 	Channel.o EventLoop.o Poller.o PollPoller.o TimeQueue.o Timer.o Thread.o CountDownLatch.o
 
@@ -17,6 +17,9 @@ Socket.o:
 	g++ -std=c++11 -c ../net/Socket.cpp -g
 Acceptor.o:
 	g++ -std=c++11 -c ../Acceptor.cpp -g
+Buffer.o:
+	g++ -std=c++11 -c ../Buffer.cpp -g
+	
 # Channel.o:
 # 	g++ -std=c++11 -c ../Channel.cpp -lpthread -g
 # EventLoop.o:

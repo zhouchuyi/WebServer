@@ -74,18 +74,28 @@ void Channel::handleEventWithGuard()
 {
     eventHandling_=true;
     Log<<eventsToString(fd_,revents_);
+
     if(revents_&POLLNVAL)
-        // Log<<" WARNING Channel::handleEvent() POLLNVAL"<<"\n";
+        Log<<" WARNING Channel::handleEvent() POLLNVAL"<<"\n";
+    
     if(revents_&(POLLERR|POLLNVAL))
     {
         if(errorCallback_)
             errorCallback_();
     }
+
+    if ((revents_ & POLLHUP) && !(revents_ & POLLIN))
+    {
+        if(closeCallback_)
+            closeCallback_();
+    }
+
     if(revents_&(POLLIN|POLLPRI|POLLHUP))
     {   Log<<"fd: "<<fd_<<eventsToString(fd_,revents_);
         if(readCallback_)
             readCallback_();
     }
+    
     if(revents_&(POLLOUT))
     {
         if(writeCallback_)

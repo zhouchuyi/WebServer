@@ -1,7 +1,7 @@
 .PHONY: clean
 objects=server.o LogFile.o Thread.o FileUtil.o CountDownLatch.o LogStream.o \
 		AsyncLogging.o Logging.o Channel.o EventLoop.o \
-		Poller.o PollPoller.o TimeQueue.o Timer.o InetAddress.o Socket.o Acceptor.o
+		Poller.o PollPoller.o TimeQueue.o Timer.o InetAddress.o Socket.o Acceptor.o TcpConnection.o Buffer.o
 test:$(objects)
 	g++ -std=c++11 -o server $(objects) -lpthread -g
 LogFile.o:
@@ -39,5 +39,10 @@ Socket.o:
 	g++ -std=c++11 -c ../net/Socket.cpp -g
 Acceptor.o:
 	g++ -std=c++11 -c ../Acceptor.cpp -g
+TcpConnection.o:
+	g++ -std=c++11 -c ../TcpConnection.cpp -g
+Buffer.o:
+	g++ -std=c++11 -c ../Buffer.cpp -g
+
 clean:
 	rm *.o server WebServer_Log_File

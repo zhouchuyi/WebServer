@@ -119,6 +119,7 @@ namespace sockets
     void toIp(char *buf,size_t size,const struct sockaddr* addr);
 
     void toIpPort(char *buf,size_t size,const struct sockaddr* addr);
+    int getSocketError(int sockfd);
 } // namespace sockets
 
 
