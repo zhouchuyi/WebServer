@@ -1,5 +1,5 @@
 #include"Acceptor.h"
-
+#include"base/Logging.h"
 
 
 Acceptor::Acceptor(EventLoop *loop,const InetAddress &listenAddr)
@@ -30,7 +30,7 @@ void Acceptor::handleRead()
 {
     loop_->assertInLoopThread();
     InetAddress peeraddress(0);
-    printf("accepting...\n");
+    Log<<"accepting in Acceptor::handleRead\n";
     int connfd=listenSocket_.accept(&peeraddress);
     if(connfd>=0)
     {
@@ -38,7 +38,7 @@ void Acceptor::handleRead()
         
         if(newConnectionCallback_)
         {
-            printf("new connection\n");
+            Log<<"accepted a new conn in Acceptor::handleRead\n";
             newConnectionCallback_(connfd,peeraddress);
         }
     }

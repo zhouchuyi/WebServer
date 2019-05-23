@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
     {
         perror("sockfd create error ");
     }
-    InetAddress address_("127.0.0.1",9980);
+    InetAddress address_("127.0.0.1",9985);
     int ret;
     ret=sockets::Connet(sockfd,address_.getSockAddr());
     if(ret<0)
@@ -25,10 +25,15 @@ int main(int argc, char const *argv[])
     ssize_t n;
     int err;
     n=buf.readFd(sockfd,&err);
-    printf("received %d",n);
-    uint32_t len=sockets::hostToNetwork32(static_cast<uint32_t>(n));
-    ::write(sockfd,&len,sizeof len);
-    // printf("%s",buf.retrieveAsString(n).c_str());
+    printf("received %d\n",n);
+    printf("%s\n",buf.retrieveAsString(n).c_str());
+    std::cout<<"input :";
+    std::string message;
+    std::cin>>message;
+    n=::write(sockfd,message.c_str(),message.size());
+    // uint32_t len=sockets::hostToNetwork32(static_cast<uint32_t>(n));
+    // ::write(sockfd,&len,sizeof len);
+    // // printf("%s",buf.retrieveAsString(n).c_str());
     ::close(sockfd);
     
         

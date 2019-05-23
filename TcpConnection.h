@@ -112,8 +112,8 @@ private:
 };
 
 
-
-
+void defaultConnectionCallback(const TcpConnectionPtr& conn);
+void defaultMessageCallback(const TcpConnectionPtr& conn,Buffer* buf);
 
 
 #endif

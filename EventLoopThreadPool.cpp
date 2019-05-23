@@ -3,7 +3,7 @@
 
 
 
-EventLoopThreadPool::EventLoopThreadPool(EventLoop* base,std::string & namearg)
+EventLoopThreadPool::EventLoopThreadPool(EventLoop* base,const std::string & namearg)
  : base_(base),
    name_(namearg),
    started_(false),
@@ -62,4 +62,17 @@ EventLoop* EventLoopThreadPool::getNextLoop()
     }
 
     return loop;
+}
+
+std:: vector<EventLoop*> EventLoopThreadPool::getAllLoops()
+{
+    if(loops_.empty())
+    {
+        return std::vector<EventLoop*>(1,base_);
+    }
+    else
+    {
+        return loops_;
+    }
+    
 }

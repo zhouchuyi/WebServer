@@ -17,7 +17,7 @@ public:
     typedef std::function<void(EventLoop*)> ThreadInitCallback;
 
 
-    EventLoopThreadPool(EventLoop* base,std::string & namearg);
+    EventLoopThreadPool(EventLoop* base,const std::string & namearg);
     ~EventLoopThreadPool();
 
     void setThreadNum(int numThreads);
@@ -26,7 +26,7 @@ public:
     //round-robin
     EventLoop* getNextLoop();
 
-    std:: vector<EventLoop*> getAllLoops();
+   std:: vector<EventLoop*> getAllLoops();
 
     bool started()const
     {
