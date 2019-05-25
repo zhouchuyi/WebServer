@@ -22,22 +22,35 @@ int main(int argc, char const *argv[])
 
 void connectioncallback(const TcpConnectionPtr& conn)
 {
+    printf("server in connectioncallback\n");
     Log<<conn->localAddress().toIpPort()<<" -> "
        <<conn->peerAddress().toIpPort()<<" -- "
        <<(conn->connected() ? " ON ":" OFF ");
     // std::cout<<conn->localAddress().toIpPort()<<" -> "
     //    <<conn->peerAddress().toIpPort()<<" -- "
     //    <<(conn->connected() ? " ON ":" OFF ")<<std::endl;
-    printf("%s",conn->peerAddress().toIpPort().c_str());
-    char buf[128];
-    snprintf(buf,sizeof buf,"SUCCESS___IN__THREAD %d",CurrentThread::tid());
-    conn->send(buf,strlen(buf));
+    if(conn->connected())
+    {
+        printf("want to send mesage \n");
+        char buf[128]; 
+        snprintf(buf,sizeof buf,"SUCCESS___IN__THREAD %d\n",CurrentThread::tid());
+        conn->send(buf,strlen(buf));
+    }
+    else
+    {
+        printf("connection destroyed %s",conn->peerAddress().toIpPort().c_str());
+    }
+    
+
+    // conn->shutdown();
 }
 void messagecallback(const TcpConnectionPtr& conn,Buffer* buf)
 {
+    printf("receive message \n");
     size_t n=buf->readableBytes();
     std::string mess=buf->retrieveAsString(n);
     printf("%s\n",mess.c_str());
+    conn->shutdown();
 }
 
 // void init(EventLoop *loop)

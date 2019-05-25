@@ -42,7 +42,8 @@ TcpConnection::TcpConnection(EventLoop* loop,
 TcpConnection::~TcpConnection()
 {
     //add log info
-    printf("dis connection\n");
+    printf("TcpConnection::~TcpConnection()\n");
+    Log<<"TcpConnection::~TcpConnection ["<<name_<<" ] \n";
     assert(state_==kDisconnected);
 }
 
@@ -103,15 +104,16 @@ void TcpConnection::sendInLoop(const char* message,size_t len)
     ssize_t nwrote=0;
     if(state_==kDisconnected)
     {
+        printf("disconnected, give up send\n");
         Log<<"disconnected, give up send ";
         return;
     }
     if(!channel_->isWriting()&&outputBuffer_.readableBytes()==0)
     {
+        Log<<"begin to write \n";
         nwrote=::write(channel_->fd(),message,len);
         if(nwrote>=0&&nwrote<len)
             Log<<"write more data on "<<peerAddr_.toIpPort();
-            printf("write more data\n");
         if(nwrote<0)
         {
             Log<<"error in sendInLoop "<<peerAddr_.toIpPort();
@@ -144,6 +146,7 @@ void TcpConnection::handleRead()
     }
     else if (n==0)
     {
+        printf("begin in handle close\n");
         handleClose();
     }
     else
@@ -157,6 +160,7 @@ void TcpConnection::handleRead()
 
 void TcpConnection::handleWrite()
 {
+    Log<<" TcpConnection::handleWrite \n";
     loop_->assertInLoopThread();
     if(channel_->isWriting())
     {
@@ -195,7 +199,6 @@ void TcpConnection::handleWrite()
 void TcpConnection::handleClose()
 {
     loop_->assertInLoopThread();
-    printf("state in handleClose %s\n",stateToString());
     assert(state_==kConnected||state_==kDisconnecting);
     setState(kDisconnected);
     channel_->disableAll();
@@ -254,7 +257,6 @@ void TcpConnection::connectEstablished()
     loop_->assertInLoopThread();
     assert(state_==kConnecting);
     setState(kConnected);
-    printf("set state in connectEstablished %s\n",stateToString());
     assert(state_==kConnected);
     channel_->tie(shared_from_this());
     channel_->enableReading();

@@ -141,7 +141,6 @@ void PollPoller::removeChannel(Channel* channel)
     assert(channels_.find(channel->fd())!=channels_.end());
     assert(channels_[channel->fd()]==channel);
     assert(channel->isNoneEvent());
-    printf("%d %d\n",channel->fd(),channel->indx());
     //assert pollfds_
     int idx=channel->indx();
     assert(idx>=0 && idx<static_cast<int>(pollfds_.size()));
