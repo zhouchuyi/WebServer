@@ -54,11 +54,12 @@ void TcpConnection::send(const std::string& message)
     {
         if(loop_->isInLoopThread())
         {
-            sendInLoop(message.c_str(),message.size());
+            sendInLoop(message);
         }
         else
         {
-            loop_->runInLoop(std::bind(&TcpConnection::sendInLoop,this,message.c_str(),message.size()));
+            void (TcpConnection::*fp)(const std::string& mess)=&TcpConnection::sendInLoop;
+            loop_->runInLoop(std::bind(fp,this,message));
         }
         
 
@@ -66,20 +67,22 @@ void TcpConnection::send(const std::string& message)
 }
 void TcpConnection::send(const void* message,size_t len)
 {
-    if(state_==kConnected)
-    {
-        if(loop_->isInLoopThread())
-        {
-            sendInLoop(static_cast<const char*>(message),len);
-        }
-        else
-        {
-            loop_->runInLoop(std::bind(&TcpConnection::sendInLoop,this,static_cast<const char*>(message),len));
-        }
+    // if(state_==kConnected)
+    // {
+    //     if(loop_->isInLoopThread())
+    //     {
+    //         sendInLoop(static_cast<const char*>(message),len);
+    //     }
+    //     else
+    //     {
+    //         loop_->runInLoop(std::bind(&TcpConnection::sendInLoop,this,static_cast<const char*>(message),len));
+    //     }
         
 
-    }
+    // }
+    send(std::string(static_cast<const char*>(message),len));
 }
+
 void TcpConnection::send(Buffer* buf)
 {
     if(state_==kConnected)
@@ -91,11 +94,16 @@ void TcpConnection::send(Buffer* buf)
         }
         else
         {
-            loop_->runInLoop(std::bind(&TcpConnection::sendInLoop,this,buf->peek(),buf->readableBytes()));
-            buf->retriveAll();
+            size_t n=buf->readableBytes();
+            void (TcpConnection::*fp)(const std::string& mess)=&TcpConnection::sendInLoop;
+            loop_->runInLoop(std::bind(fp,this,buf->retrieveAsString(n)));
         }
         
     }
+}
+void TcpConnection::sendInLoop(const std::string& mess)
+{
+    sendInLoop(mess.c_str(),mess.size());    
 }
 
 void TcpConnection::sendInLoop(const char* message,size_t len)

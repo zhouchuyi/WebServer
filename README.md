@@ -1,2 +1,2 @@
 # WebServer
-A webserver based on reactors using C++ 11
+A webserver based on reactors using C++11

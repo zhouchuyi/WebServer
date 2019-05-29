@@ -70,7 +70,7 @@ void TcpClient::newConnection(int sockfd)
         conn_=conn;
     }
     conn->connectEstablished();
-    printf("success TcpClient::newConnection(int sockfd) \n");
+    // printf("success TcpClient::newConnection(int sockfd) \n");
 }
 
 void TcpClient::removeConnection(const TcpConnectionPtr& conn)

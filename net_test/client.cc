@@ -72,13 +72,27 @@ void connectioncallback(const TcpConnectionPtr& conn)
     printf("success connected to %s\n",conn->peerAddress().toIpPort().c_str());
     if(conn->connected())
     {
-        conn->send("hello\n",6);
+        Buffer buf;
+        char str[64];
+        snprintf(str,sizeof buf,"hello from %s\n",conn->localAddress().toIpPort().c_str());
+        std::string mess(str);
+        printf("string::--%s--%d\n",mess.c_str(),mess.size());
+        buf.append(mess);
+        uint32_t len=static_cast<uint32_t>(mess.size());
+        printf("%d\n",len);
+        uint32_t be32=sockets::hostToNetwork32(len);
+        printf("%d",be32);
+        buf.prepend(&be32,sizeof be32);
+        conn->send(&buf);
+        // conn->send("hello\n",6);
+        // char buf[64];
+        // snprintf(buf,sizeof buf,"hello from %s\n",conn->localAddress().toIpPort().c_str());
+        // conn->send(buf);
     }
     else
     {
-        const char* s="bye saasssssssssss";
+        
         printf("begin to send bye\n");
-        conn->send(s,strlen(s));
     }
     
 
@@ -86,7 +100,5 @@ void connectioncallback(const TcpConnectionPtr& conn)
 void messagecallabck(const TcpConnectionPtr& conn,Buffer* buf)
 {
     printf("received message \n");
-    size_t n=buf->readableBytes();
-    printf("%s",buf->retrieveAsString(n).c_str());
-
+    conn->shutdown();
 }

@@ -1,19 +1,13 @@
 .PHONY: clean
-objects1=client.o InetAddress.o Socket.o Buffer.o Connector.o \
+objects1=ChatClient.o InetAddress.o Socket.o Buffer.o Connector.o \
 	LogFile.o Thread.o FileUtil.o CountDownLatch.o LogStream.o \
 		AsyncLogging.o Logging.o Channel.o EventLoop.o \
-		Poller.o PollPoller.o TimeQueue.o Timer.o TcpClient.o TcpConnection.o
-# objects2=server.o InetAddress.o Socket.o Acceptor.o \
-# 	Channel.o EventLoop.o Poller.o PollPoller.o TimeQueue.o Timer.o Thread.o CountDownLatch.o
+		Poller.o PollPoller.o TimeQueue.o Timer.o TcpClient.o TcpConnection.o EventLoopThread.o
 
-client:$(objects1)
-	g++ -std=c++11 -o client $(objects1) -lpthread -g
-# server:$(objects2)
-# 	g++ -std=c++11 -o server $(objects2) -g
-client.o:
-	g++ -std=c++11 -c client.cc -g
-# server.o:
-# 	g++ -std=c++11 -c server.cc -g
+ChatClient:$(objects1)
+	g++ -std=c++11 -o ChatClient $(objects1) -lpthread -g
+ChatClient.o:
+	g++ -std=c++11 -c ChatClient.cpp -g
 InetAddress.o:
 	g++ -std=c++11 -c ../net/InetAddress.cpp -g
 Socket.o:
@@ -54,22 +48,7 @@ TcpClient.o:
 	g++ -std=c++11 -c ../TcpClient.cpp -lpthread -g
 TcpConnection.o:
 	g++ -std=c++11 -c ../TcpConnection.cpp -g
-
-# Channel.o:
-# 	g++ -std=c++11 -c ../Channel.cpp -lpthread -g
-# EventLoop.o:
-# 	g++ -std=c++11 -c ../EventLoop.cpp -lpthread -g
-# Poller.o:
-# 	g++ -std=c++11 -c ../Poller.cpp -lpthread -g
-# PollPoller.o:
-# 	g++ -std=c++11 -c ../PollPoller.cpp -lpthread -g
-# TimeQueue.o:
-# 	g++ -std=c++11 -c ../TimeQueue.cpp -lpthread -g
-# Timer.o:
-# 	g++ -std=c++11 -c ../Timer.cpp -lpthread -g
-# Thread.o:
-# 	g++ -std=c++11 -c ../base/Thread.cpp -lpthread -g
-# CountDownLatch.o:../base/mutex.h ../base/Condition.h
-# 	g++ -std=c++11 -c ../base/CountDownLatch.cpp -lpthread -g
+EventLoopThread.o:
+	g++ -std=c++11 -c ../EventLoopThread.cpp -g
 clean:
-	rm *.o client WebServer_Log_File
+	rm *.o ChatClient WebServer_Log_File

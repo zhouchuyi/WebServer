@@ -83,6 +83,8 @@ private:
     // void sendInLoop(std::string &&message);
     // void sendInLoop(const std::string& message);
     void sendInLoop(const char* message,size_t len);
+    void sendInLoop(const std::string& mess);
+    // void sendInLoop(const std::shared_ptr<void> &tie,const char* message,size_t len);
     void startReadInLoop();
     void stopReadInLoop();
     void shutdownInLoop();
