@@ -1,0 +1,318 @@
+2019-05-29 15:27:15
+TcpClient::TcpClient[ChatClient] 
+../TcpClient.cpp : 20 
+2019-05-29 15:27:15
+TcpClient::connect[ChatClient] - connecting to 127.0.0.1:9985../TcpClient.cpp : 32 
+2019-05-29 15:27:15
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:15
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:15
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:15
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:15
+7: OUT ../Channel.cpp : 76 
+2019-05-29 15:27:15
+ Connector::handleWrite() 
+../Connector.cpp : 98 
+2019-05-29 15:27:15
+Connector::handleWrite connectioncallback-------------------
+../Connector.cpp : 114 
+2019-05-29 15:27:15
+127.0.0.1:9985 -> 127.0.0.1:43204 ON ChatClient.cpp : 40 
+2019-05-29 15:27:17
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:17
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:17
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:17
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-29 15:27:17
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:17
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:17
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:19
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:19
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:19
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:19
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-29 15:27:19
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:19
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:19
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:29
+ nothing happend in Epollpoller::poll() ../Epollpoller.cpp : 51 
+2019-05-29 15:27:30
+TcpClient::TcpClient[ChatClient] 
+../TcpClient.cpp : 20 
+2019-05-29 15:27:30
+TcpClient::connect[ChatClient] - connecting to 127.0.0.1:9985../TcpClient.cpp : 32 
+2019-05-29 15:27:30
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:30
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:30
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:30
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:30
+7: OUT ../Channel.cpp : 76 
+2019-05-29 15:27:30
+ Connector::handleWrite() 
+../Connector.cpp : 98 
+2019-05-29 15:27:30
+Connector::handleWrite connectioncallback-------------------
+../Connector.cpp : 114 
+2019-05-29 15:27:30
+127.0.0.1:9985 -> 127.0.0.1:43206 ON ChatClient.cpp : 40 
+2019-05-29 15:27:31
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:31
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:31
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:31
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-29 15:27:31
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:31
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:31
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:31
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:31
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:31
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:34
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:34
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:34
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:34
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-29 15:27:34
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:34
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:34
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:34
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:34
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:34
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:35
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:35
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:35
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:35
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-29 15:27:35
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:35
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:35
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:35
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:35
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:35
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:37
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:37
+5: IN ../Channel.cpp : 76 
+2019-05-29 15:27:37
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-29 15:27:37
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-29 15:27:37
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:37
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:37
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-29 15:27:37
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-29 15:27:37
+7: IN ../Channel.cpp : 76 
+2019-05-29 15:27:37
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:27
+TcpClient::TcpClient[ChatClient] 
+../TcpClient.cpp : 20 
+2019-05-30 14:41:27
+TcpClient::connect[ChatClient] - connecting to 127.0.0.1:9985../TcpClient.cpp : 32 
+2019-05-30 14:41:27
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:27
+5: IN ../Channel.cpp : 76 
+2019-05-30 14:41:27
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-30 14:41:27
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:27
+7: OUT ../Channel.cpp : 76 
+2019-05-30 14:41:27
+ Connector::handleWrite() 
+../Connector.cpp : 98 
+2019-05-30 14:41:27
+Connector::handleWrite connectioncallback-------------------
+../Connector.cpp : 114 
+2019-05-30 14:41:27
+127.0.0.1:9985 -> 127.0.0.1:44970 ON ChatClient.cpp : 40 
+2019-05-30 14:41:27
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:27
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:27
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:37
+ nothing happend in Epollpoller::poll() ../Epollpoller.cpp : 51 
+2019-05-30 14:41:41
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:41
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:41
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:41
+TcpClient::TcpClient[ChatClient] 
+../TcpClient.cpp : 20 
+2019-05-30 14:41:41
+TcpClient::connect[ChatClient] - connecting to 127.0.0.1:9985../TcpClient.cpp : 32 
+2019-05-30 14:41:41
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:41
+5: IN ../Channel.cpp : 76 
+2019-05-30 14:41:41
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-30 14:41:41
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:41
+7: OUT ../Channel.cpp : 76 
+2019-05-30 14:41:41
+ Connector::handleWrite() 
+../Connector.cpp : 98 
+2019-05-30 14:41:41
+Connector::handleWrite connectioncallback-------------------
+../Connector.cpp : 114 
+2019-05-30 14:41:41
+127.0.0.1:9985 -> 127.0.0.1:44972 ON ChatClient.cpp : 40 
+2019-05-30 14:41:41
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:41
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:41
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:46
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:46
+5: IN ../Channel.cpp : 76 
+2019-05-30 14:41:46
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-30 14:41:46
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-30 14:41:46
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:46
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:46
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:46
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:46
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:48
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:48
+5: IN ../Channel.cpp : 76 
+2019-05-30 14:41:48
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-30 14:41:48
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-30 14:41:48
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:48
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:48
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:46
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:48
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:48
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:48
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:50
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:50
+5: IN ../Channel.cpp : 76 
+2019-05-30 14:41:50
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-30 14:41:50
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-30 14:41:50
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:50
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:50
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:50
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:50
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:50
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:53
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:53
+5: IN ../Channel.cpp : 76 
+2019-05-30 14:41:53
+fd: 55: IN ../Channel.cpp : 94 
+2019-05-30 14:41:53
+begin to write 
+../TcpConnection.cpp : 121 
+2019-05-30 14:41:53
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:53
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:53
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:53
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:53
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:53
+fd: 77: IN ../Channel.cpp : 94 
+2019-05-30 14:41:56
+1 event happend in Epollpoller::poll() ../Epollpoller.cpp : 42 
+2019-05-30 14:41:56
+7: IN ../Channel.cpp : 76 
+2019-05-30 14:41:56
+fd: 77: IN ../Channel.cpp : 94 

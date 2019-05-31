@@ -53,17 +53,43 @@ void ChatServer::onConnection(const TcpConnectionPtr& conn)
     {
         auto res=LocalConnectionList::instace().insert(conn);
         assert(res.second==true);
+        char buf[64];
+        snprintf(buf,sizeof buf,"Welcome --%s--!!",conn->peerAddress().toIpPort().c_str());
+        std::string message(buf);
+        EventLoop::Functor f=std::bind(&ChatServer::distributeMessage,this,message);
+        std::set<EventLoop*> temp;
+        {
+            MutexLockGuard lcok(mutex_);
+            temp=loops_;
+        }
+        for (auto &ioloop : temp)
+        {
+            ioloop->queueInLoop(f);
+        }
     }
     else
     {
         auto res=LocalConnectionList::instace().erase(conn);
         assert(res==true);
+        char buf[64];
+        snprintf(buf,sizeof buf,"GoodBye --%s--!!",conn->peerAddress().toIpPort().c_str());
+        std::string message(buf);
+        EventLoop::Functor f=std::bind(&ChatServer::distributeMessage,this,message);
+        std::set<EventLoop*> temp;
+        {
+            MutexLockGuard lcok(mutex_);
+            temp=loops_;
+        }
+        for (auto &ioloop : temp)
+        {
+            ioloop->queueInLoop(f);
+        }
     }
     
 }
 void ChatServer::onStringMessage(const TcpConnectionPtr& conn,const std::string& message)
 {
-    printf("%s",message.c_str());
+    // printf("%s",message.c_str());
     EventLoop::Functor f=std::bind(&ChatServer::distributeMessage,this,message);
     std::set<EventLoop*> temp;
     {

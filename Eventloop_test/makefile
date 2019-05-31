@@ -1,7 +1,7 @@
 .PHONY: clean
-objects=server.o LogFile.o Thread.o FileUtil.o CountDownLatch.o LogStream.o \
+objects=event_loop.o LogFile.o Thread.o FileUtil.o CountDownLatch.o LogStream.o \
 		AsyncLogging.o Logging.o Channel.o EventLoop.o \
-		Poller.o PollPoller.o TimeQueue.o Timer.o InetAddress.o Socket.o Acceptor.o TcpConnection.o Buffer.o
+		Poller.o PollPoller.o TimeQueue.o Timer.o InetAddress.o Socket.o Acceptor.o TcpConnection.o Buffer.o Epollpoller.o
 test:$(objects)
 	g++ -std=c++11 -o server $(objects) -lpthread -g
 LogFile.o:
@@ -30,9 +30,10 @@ TimeQueue.o:
 	g++ -std=c++11 -c ../TimeQueue.cpp -lpthread -g
 Timer.o:
 	g++ -std=c++11 -c ../Timer.cpp -lpthread -g
-server.o:
-	g++ -std=c++11 -c ./server.cpp -lpthread -g
-
+event_loop.o:
+	g++ -std=c++11 -c ./event_loop.cc -lpthread -g
+Epollpoller.o:
+	g++ -std=c++11 -c ../Epollpoller.cpp -lpthread -g
 InetAddress.o:
 	g++ -std=c++11 -c ../net/InetAddress.cpp -g
 Socket.o:

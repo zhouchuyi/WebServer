@@ -1,4 +1,4 @@
-#ifndef POLLER_H_
+ #ifndef POLLER_H_
 #define POLLER_H_
 #include"EventLoop.h"
 #include<map>
@@ -25,6 +25,7 @@ public:
     } 
 
     static Poller* newDefaultPoller(EventLoop *loop);
+    static Poller* newEpoller(EventLoop* loop);
 protected:
     typedef std::map<int,Channel*> ChannelMap;//the map between fd and channel
     ChannelMap channels_;

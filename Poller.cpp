@@ -1,6 +1,7 @@
 #include"Poller.h"
 #include"Channel.h"
 #include"PollPoller.h"
+#include"Epollpoller.h"
 Poller::Poller(EventLoop *loop)
    : ownerLoop_(loop)
 {
@@ -19,4 +20,9 @@ bool Poller::hasChannel(Channel *channel)const
 Poller* Poller::newDefaultPoller(EventLoop *loop)
 {
     return new PollPoller(loop);
+}
+
+Poller* Poller::newEpoller(EventLoop* loop)
+{
+    return new Epollpoller(loop);
 }

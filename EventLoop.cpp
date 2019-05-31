@@ -34,7 +34,7 @@ EventLoop::EventLoop()
     iteration_(0),
     threadId_(CurrentThread::tid()),
     pollReturnTime(0),
-    poller_(Poller::newDefaultPoller(this)),
+    poller_(Poller::newEpoller(this)),
     timequeue_(new TimeQueue(this)),
     WakeupFd_(::createEventfd()),
     wakeupChannel(new Channel(this,WakeupFd_)),

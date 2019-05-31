@@ -2,7 +2,7 @@
 objects1=ChatClient.o InetAddress.o Socket.o Buffer.o Connector.o \
 	LogFile.o Thread.o FileUtil.o CountDownLatch.o LogStream.o \
 		AsyncLogging.o Logging.o Channel.o EventLoop.o \
-		Poller.o PollPoller.o TimeQueue.o Timer.o TcpClient.o TcpConnection.o EventLoopThread.o
+		Poller.o PollPoller.o TimeQueue.o Timer.o TcpClient.o TcpConnection.o EventLoopThread.o Epollpoller.o
 
 ChatClient:$(objects1)
 	g++ -std=c++11 -o ChatClient $(objects1) -lpthread -g
@@ -50,5 +50,7 @@ TcpConnection.o:
 	g++ -std=c++11 -c ../TcpConnection.cpp -g
 EventLoopThread.o:
 	g++ -std=c++11 -c ../EventLoopThread.cpp -g
+Epollpoller.o:
+	g++ -std=c++11 -c ../Epollpoller.cpp -g
 clean:
 	rm *.o ChatClient WebServer_Log_File

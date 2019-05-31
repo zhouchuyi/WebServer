@@ -42,7 +42,7 @@ TcpConnection::TcpConnection(EventLoop* loop,
 TcpConnection::~TcpConnection()
 {
     //add log info
-    printf("TcpConnection::~TcpConnection()\n");
+    // printf("TcpConnection::~TcpConnection()\n");
     Log<<"TcpConnection::~TcpConnection ["<<name_<<" ] \n";
     assert(state_==kDisconnected);
 }
@@ -112,7 +112,7 @@ void TcpConnection::sendInLoop(const char* message,size_t len)
     ssize_t nwrote=0;
     if(state_==kDisconnected)
     {
-        printf("disconnected, give up send\n");
+        // printf("disconnected, give up send\n");
         Log<<"disconnected, give up send ";
         return;
     }
@@ -125,7 +125,7 @@ void TcpConnection::sendInLoop(const char* message,size_t len)
         if(nwrote<0)
         {
             Log<<"error in sendInLoop "<<peerAddr_.toIpPort();
-            perror("error in sendInLoop ");
+            // perror("error in sendInLoop ");
             nwrote=0;
         }
     }
@@ -154,7 +154,7 @@ void TcpConnection::handleRead()
     }
     else if (n==0)
     {
-        printf("begin in handle close\n");
+        // printf("begin in handle close\n");
         handleClose();
     }
     else
